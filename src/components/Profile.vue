@@ -6,13 +6,13 @@
             </div>
             <div class="info">
                 <ul>
-                    <li id="name">John Doe</li>
-                    <li id="birthdate">11/10/1990</li>
-                    <li id="faculty">Software Engineering</li>
+                    <li id="name">{{user.firstname}} {{user.lastname}}</li>
+                    <li id="birthdate">{{user.birthdate}}</li>
+                    <li id="faculty">{{user.faculty}}</li>
                 </ul>
             </div>
             <div id="gpa">
-                <strong>2.75</strong>
+                <strong>{{user.gpa}}</strong>
             </div>
             <div class="clear-fix"></div>
         </div>
@@ -21,7 +21,10 @@
 
 <script>
     export default {
-        name: "Profile"
+        name: "Profile",
+        props: {
+            user: Object
+        }
     }
 </script>
 

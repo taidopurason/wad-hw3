@@ -6,8 +6,8 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile></Profile>
-                    <Courses></Courses>
+                    <Profile :user="user"></Profile>
+                    <Courses :courses="courses"></Courses>
                 </div>
                 <div class="controls">
                     <button id="profile-button" class="pill active">Profile</button>
@@ -31,10 +31,48 @@
 <script>
     import Profile from "./components/Profile";
     import Courses from "./components/Courses";
+    import Course from './models/Course'
+    import User from './models/User'
 
     export default {
         name: 'app',
-        components: {Courses, Profile}
+        components: {Courses, Profile},
+        data: () => {
+            return {
+                courses: [new Course("Web Application Development", 3, 100),
+                    new Course("Machine Learning", 3, 85),
+                    new Course("Operating Systems", 1, 81),
+                    new Course("Parallel Computing", 2, 37)],
+                user: new User('John', 'Doe', "11/10/1990", "Software Engineering", 2.75)
+            }
+        },
+        methods: {
+            calculateGPA: function () {
+                let sum = 0;
+                for (let i = 0; i < this.courses.length; i++) {
+                    sum += this.getGPAPoint(this.courses[i].grade)
+                }
+                this.user.gpa = sum / this.courses.length
+            },
+            getGPAPoint: function (grade) {
+                if (grade > 90 && grade <= 100) {
+                    return 4;
+                } else if (grade > 80) {
+                    return 3;
+                } else if (grade > 70) {
+                    return 2;
+                } else if (grade > 60) {
+                    return 1;
+                } else if (grade > 50) {
+                    return 0.5
+                } else {
+                    return 0;
+                }
+            }
+        },
+        beforeMount() {
+            this.calculateGPA()
+        }
     }
 </script>
 
