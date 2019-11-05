@@ -1,5 +1,6 @@
 <template>
     <main id="app">
+        <!---TODO: Võiks headeri eraldi tõsta --->
         <header>
             <strong>Welcome to your dashboard!</strong>
         </header>
@@ -15,28 +16,22 @@
                 </div>
             </section>
         </section>
-        <footer>
-            <ul class="links">
-                <li>
-                    <a href="https://ois2.ut.ee/" target="_blank">OIS</a>
-                </li>
-                <li>
-                    <a href="https://courses.cs.ut.ee/" target="_blank">Courses</a>
-                </li>
-            </ul>
-        </footer>
+        <Footer></Footer>
+
+
     </main>
 </template>
 
 <script>
     import Profile from "./components/Profile";
     import Courses from "./components/Courses";
+    import Footer from "./components/Footer";
     import Course from './models/Course'
     import User from './models/User'
 
     export default {
         name: 'app',
-        components: {Courses, Profile},
+        components: {Footer, Courses, Profile},
         data: () => {
             return {
                 courses: [new Course("Web Application Development", 3, 100),
@@ -107,34 +102,6 @@
         text-align: center;
         margin-bottom: 10px;
         height: 60px;
-    }
-
-    footer {
-        padding: 30px 0;
-        background-color: #607D8B;
-        margin-top: 10px;
-        height: 100px;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
-
-    footer .links {
-        display: block;
-        width: 100%;
-        max-width: 200px;
-        margin: 0 auto;
-        color: #acd7ff;
-        font-size: 11px;
-    }
-
-    footer .links a {
-        text-decoration: none;
-        color: #acd7ff;
-    }
-
-    footer .links a:hover {
-        text-decoration: underline;
     }
 
     #container {
