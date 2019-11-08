@@ -1,5 +1,5 @@
 <template>
-    <div id="courses-container" class="tab">
+    <div id="courses-container" class="tab active">
         <h1 class="title">Courses</h1>
         <table id="courses">
             <thead>

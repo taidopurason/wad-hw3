@@ -4,12 +4,12 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile :user="user"/>
-                    <Courses :courses="courses"/>
+                    <Profile v-if="!seen" :user="user"/>
+                    <Courses v-if="seen" :courses="courses"/>
                 </div>
                 <div class="controls">
-                    <button id="profile-button" class="pill active">Profile</button>
-                    <button id="courses-button" class="pill">Courses</button>
+                    <button @click="seeProfile" v-bind:class="[seen ? 'pill' : 'pill active']" id="profile-button" class="pill">Profile</button>
+                    <button @click="seeCourses" id="courses-button" v-bind:class="[!seen ? 'pill' : 'pill active']" class="pill">Courses</button>
                 </div>
             </section>
         </section>
@@ -36,7 +36,8 @@
                     new Course("Machine Learning", 3, 85),
                     new Course("Operating Systems", 1, 81),
                     new Course("Parallel Computing", 2, 37)],
-                user: new User('John', 'Doe', "11/10/1990", "Software Engineering", 2.75)
+                user: new User('John', 'Doe', "11/10/1990", "Software Engineering", 2.75),
+                seen:false
             }
         },
         methods: {
@@ -61,6 +62,12 @@
                 } else {
                     return 0;
                 }
+            },
+            seeProfile: function () {
+                this.seen = false
+            },
+            seeCourses: function () {
+                this.seen = true
             }
         },
         beforeMount() {
