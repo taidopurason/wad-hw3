@@ -4,12 +4,12 @@
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile v-if="!seen" :user="user"/>
-                    <Courses v-if="seen" :courses="courses"/>
+                    <Profile v-if="!isActive" :user="user"/>
+                    <Courses v-if="isActive" :courses="courses"/>
                 </div>
                 <div class="controls">
-                    <button @click="seeProfile" v-bind:class="[seen ? 'pill' : 'pill active']" id="profile-button" class="pill">Profile</button>
-                    <button @click="seeCourses" id="courses-button" v-bind:class="[!seen ? 'pill' : 'pill active']" class="pill">Courses</button>
+                    <button @click="seeProfile" v-bind:class="[isActive ? 'pill' : 'pill active']" id="profile-button" class="pill">Profile</button>
+                    <button @click="seeCourses" id="courses-button" v-bind:class="[!isActive ? 'pill' : 'pill active']" class="pill">Courses</button>
                 </div>
             </section>
         </section>
@@ -37,7 +37,7 @@
                     new Course("Operating Systems", 1, 81),
                     new Course("Parallel Computing", 2, 37)],
                 user: new User('John', 'Doe', "11/10/1990", "Software Engineering", 2.75),
-                seen:false
+                isActive:false
             }
         },
         methods: {
@@ -64,10 +64,10 @@
                 }
             },
             seeProfile: function () {
-                this.seen = false
+                this.isActive = false
             },
             seeCourses: function () {
-                this.seen = true
+                this.isActive = true
             }
         },
         beforeMount() {
@@ -100,7 +100,9 @@
         clear: both;
     }
 
-
+    button {
+        margin-right: 5px;
+    }
 
     #container {
         width: 80%;

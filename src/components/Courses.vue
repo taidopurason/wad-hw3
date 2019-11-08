@@ -21,14 +21,14 @@
         </table>
         <br>
         <br>
-        <div>
-            <button id="add-course-button" class="blue-button">+</button>
-            <span id="add-course">
+        <div id="add-course">
+            <button @click="addCourse" id="add-course-button" class="blue-button">+</button>
+            <span v-if="isActive">
                                 <input class="input" type="text" placeholder="Course title" id="title">
                                 <input class="input" type="number" min="1" max="8" placeholder="Semester" id="semester">
                                 <input class="input" type="number" min="0" max="100" placeholder="Grade" id="grade">
                                 <button class="green-button" id="save-course">Save</button>
-                                <button class="grey-button" id="cancel-course">Cancel</button>
+                                <button @click="cancelClicked" class="grey-button" id="cancel-course">Cancel</button>
                             </span>
         </div>
     </div>
@@ -37,21 +37,39 @@
 <script>
     export default {
         name: "Courses",
+        data: function () {
+            return {
+                isActive:false
+            }
+        },
         props:  {
             courses: Array
+        },
+        methods: {
+            addCourse: function () {
+                this.isActive = !this.isActive
+            },
+            cancelClicked: function () {
+                this.isActive = false
+            }
         }
     }
 </script>
 
 <style scoped>
     #add-course {
-        display: none;
+        display: flex;
+    }
+
+    button {
+        margin-right: 5px;
     }
 
     .input {
         border: 1px solid #cccccc;
         padding: 10px 20px;
         min-width: 135px;
+        margin-right: 5px;
     }
 
     table {
