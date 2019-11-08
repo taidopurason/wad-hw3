@@ -1,14 +1,12 @@
 <template>
     <main id="app">
         <!---TODO: Võiks headeri eraldi tõsta --->
-        <header>
-            <strong>Welcome to your dashboard!</strong>
-        </header>
+        <Header/>
         <section id="container">
             <section id="main">
                 <div class="content">
-                    <Profile :user="user"></Profile>
-                    <Courses :courses="courses"></Courses>
+                    <Profile :user="user"/>
+                    <Courses :courses="courses"/>
                 </div>
                 <div class="controls">
                     <button id="profile-button" class="pill active">Profile</button>
@@ -16,7 +14,7 @@
                 </div>
             </section>
         </section>
-        <Footer></Footer>
+        <Footer/>
 
 
     </main>
@@ -28,10 +26,11 @@
     import Footer from "./components/Footer";
     import Course from './models/Course'
     import User from './models/User'
+    import Header from "./components/Header";
 
     export default {
         name: 'app',
-        components: {Footer, Courses, Profile},
+        components: {Footer, Courses, Profile, Header},
         data: () => {
             return {
                 courses: [new Course("Web Application Development", 3, 100),
@@ -95,14 +94,7 @@
         clear: both;
     }
 
-    header {
-        padding: 20px;
-        background-color: #2196F3;
-        color: #ffffff;
-        text-align: center;
-        margin-bottom: 10px;
-        height: 60px;
-    }
+
 
     #container {
         width: 80%;
