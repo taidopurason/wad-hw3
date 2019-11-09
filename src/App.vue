@@ -5,7 +5,7 @@
             <section id="main">
                 <div class="content">
                     <Profile v-if="!isActive" :user="user"/>
-                    <Courses v-if="isActive" :courses="courses"/>
+                    <Courses v-if="isActive" :courses="courses" :save-course="addCourse"/>
                 </div>
                 <div class="controls">
                     <button @click="seeProfile" v-bind:class="[isActive ? 'pill' : 'pill active']" id="profile-button" class="pill">Profile</button>
@@ -37,10 +37,14 @@
                     new Course("Operating Systems", 1, 81),
                     new Course("Parallel Computing", 2, 37)],
                 user: new User('John', 'Doe', "11/10/1990", "Software Engineering", 2.75),
-                isActive:false
+                isActive: false
             }
         },
         methods: {
+            addCourse: function (name, semester, grade) {
+                this.courses.push(new Course(name, semester, grade));
+                this.calculateGPA()
+            },
             calculateGPA: function () {
                 let sum = 0;
                 for (let i = 0; i < this.courses.length; i++) {
@@ -112,7 +116,6 @@
         background-color: #ffffff;
         margin: 0 auto;
     }
-
 
 
     .content {
