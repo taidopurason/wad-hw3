@@ -50,7 +50,7 @@
                 for (let i = 0; i < this.courses.length; i++) {
                     sum += this.getGPAPoint(this.courses[i].grade)
                 }
-                this.user.gpa = sum / this.courses.length
+                this.user.gpa = Math.round(sum / this.courses.length * 100) / 100
             },
             getGPAPoint: function (grade) {
                 if (grade > 90 && grade <= 100) {
