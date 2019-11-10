@@ -23,7 +23,35 @@
     export default {
         name: "Profile",
         props: {
-            user: Object
+            user: Object,
+            courses: Array
+        },
+        methods: {
+            calculateGPA: function () {
+                let sum = 0;
+                for (let i = 0; i < this.courses.length; i++) {
+                    sum += this.getGPAPoint(this.courses[i].grade)
+                }
+                this.user.gpa = Math.round(sum / this.courses.length * 100) / 100
+            },
+            getGPAPoint: function (grade) {
+                if (grade > 90 && grade <= 100) {
+                    return 4;
+                } else if (grade > 80) {
+                    return 3;
+                } else if (grade > 70) {
+                    return 2;
+                } else if (grade > 60) {
+                    return 1;
+                } else if (grade > 50) {
+                    return 0.5
+                } else {
+                    return 0;
+                }
+            }
+        },
+        beforeMount() {
+            this.calculateGPA()
         }
     }
 </script>
